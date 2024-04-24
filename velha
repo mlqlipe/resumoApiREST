@@ -1,3 +1,4 @@
+PFont minhaFonte; // Variável para armazenar a fonte
 // Variáveis para o tabuleiro
 char[][] board;
 int boardSize = 3;
@@ -20,11 +21,17 @@ void setup() {
   for (int i = 0; i < boardSize; i++) {
     for (int j = 0; j < boardSize; j++) {
       board[i][j] = ' ';
+      // Carregar a fonte desejada
+  minhaFonte = createFont("GraffitiUrban-Regular.otf", 32);
+  
+  // Definir a fonte
+  textFont(minhaFonte);
     }
   }
   
   // Inicializar o botão para escolher jogar contra a máquina
-  computerButton = new Button(width/2 - 100, height - 40, 200, 30, "Play Against Computer");
+  textSize(100);
+  computerButton = new Button(width/2 - 100, height - 40, 200, 30, "JOGAR CONTRA CPU");
 }
 
 void draw() {
@@ -62,26 +69,29 @@ void drawX(int i, int j) {
   float x = i * cellSize + cellSize/4;
   float y = j * cellSize + cellSize/4;
   float w = cellSize/2;
-  stroke(0, 255, 0); // verde
+  fill(0); // verde
   line(x, y, x+w, y+w);
   line(x+w, y, x, y+w);
 }
 
-void drawO(int i, int j) {
+void drawO(int i, int j) {//bola
   float x = i * cellSize + cellSize/4;
   float y = j * cellSize + cellSize/4;
   float w = cellSize/2;
-  stroke(128, 0, 128); // roxo
+ fill(255); // branco
   ellipseMode(CORNER);
   ellipse(x, y, w, w);
 }
 
 void drawGameOver() {
   fill(0);
-  textSize(32);
+  textSize(80);
   textAlign(CENTER, CENTER);
-  text("Você perdeu, otário!", width/2, height/2);
-  text("Click to restart", width/2, height/2 + 50);
+  fill(random(255), random(255), random(255));
+  text("ACABOU!!!", width/2, height/2);
+  textSize(40);
+  fill(0, 0, 240);
+  text("R E I N I C I A R", width/2, height/2 + 130);
 }
 
 void mouseClicked() {
@@ -218,3 +228,4 @@ class Button {
     return mx > x && mx < x + w && my > y && my < y + h;
   }
 }
+  
